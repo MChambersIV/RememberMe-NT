@@ -21,19 +21,20 @@ exp.get('/notes', (req, res) => {
 });
   
 exp.get('/api/notes', (req, res) => {
-    res.json(`${req.method} request received`);
-
     console.info(`${req.method} request received`);
+    
+   return res.json(db);
+
 });
 
 exp.post('/api/notes', (req, res) => {
     const { title, text } = req.body;
 
     if (title && text) {
-    const newNote = {
+    const newNoteSave = {
         title,
         text,
-    };
+     };
 
     fs.readFile('./db/db.json', 'utf8', (err, data) => {
         if (err) {
@@ -41,7 +42,7 @@ exp.post('/api/notes', (req, res) => {
         } else {
           const existingNotes = JSON.parse(data);
   
-          existingNotes.push(newNote);
+          existingNotes.push(newNoteSave);
 
             fs.writeFile(
                 './db/db.json',
@@ -54,9 +55,16 @@ exp.post('/api/notes', (req, res) => {
             );
         }
     });
+    const response = {
+        status: 'success',
+        body: newNoteSave,
+    }
+    res.json(response);
     } else {
         res.json('Error attempting to add note')
     }
+
+    
 });
 
 
