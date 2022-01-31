@@ -70,4 +70,4 @@ exp.post('/api/notes', (req, res) => {
 
 
 
-exp.listen(PORT, () => console.log(`http://localhost:${PORT}`));
+exp.listen(process.env.PORT || PORT, () => console.log(`http://localhost:${PORT}`));
