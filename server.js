@@ -15,10 +15,6 @@ exp.use(express.static('public'));
 exp.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
 });
-
-exp.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/index.html'));
-});
   
 exp.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/notes.html'));
@@ -32,45 +28,15 @@ exp.get('/api/notes', (req, res) => {
 });
 
 exp.post('/api/notes', (req, res) => {
-    const { title, text } = req.body;
+   db.push(req.body);
 
-    if (title && text) {
-    const newNoteSave = {
-        title,
-        text,
-     };
+ 
 
-    fs.readFile('./db/db.json', 'utf8', (err, data) => {
-        if (err) {
-          console.error(err);
-        } else {
-          const existingNotes = JSON.parse(data);
-  
-          existingNotes.push(newNoteSave);
-
-            fs.writeFile(
-                './db/db.json',
-                JSON.stringify(existingNotes, null, 4),
-                (writeErr) =>
+    fs.writeFile('./db/db.json', JSON.stringify(db, null, 4), (writeErr) =>
                 writeErr
                 ? console.error(writeErr)
-                : console.info('Successfully added new Note')
-
-            );
-        }
-    });
-    const response = {
-        status: 'success',
-        body: newNoteSave,
-    }
-    res.json(response);
-    } else {
-        res.json('Error attempting to add note')
-    }
-
-    
+                : console.info('Successfully added new Note'));
 });
-
 
 
 
