@@ -15,6 +15,10 @@ exp.use(express.static('public'));
 exp.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
 });
+
+exp.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/index.html'));
+});
   
 exp.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/notes.html'));
