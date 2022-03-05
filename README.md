@@ -2,7 +2,7 @@
 
 This is an application for taking notes and viewing previously saved notes. Once on the landing page, click on the Get Started Button to create a new note and view previously saved notes.
 
-Here's a link to the deployed site: https://mchambersiv.github.io/portfolio-v4-react/
+Here's a link to the deployed site: https://thawing-gorge-75034.herokuapp.com/
 
 
 
