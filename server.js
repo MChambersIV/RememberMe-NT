@@ -28,7 +28,11 @@ exp.get('/api/notes', (req, res) => {
 });
 
 exp.post('/api/notes', (req, res) => {
-   db.push(req.body);
+   
+    req.body.id = (Math.floor(Math.random() * 50000));
+   
+    db.push(req.body);
+
 
  
 
@@ -36,6 +40,8 @@ exp.post('/api/notes', (req, res) => {
                 writeErr
                 ? console.error(writeErr)
                 : console.info('Successfully added new Note'));
+
+    console.log("New note created.")
 });
 
 
